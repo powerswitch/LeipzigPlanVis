@@ -1,0 +1,86 @@
+body {
+    white-space: nowrap;
+    font-family: "Verdana", Arial, sans-serif
+}
+h1 {
+    text-align: left;
+    text-indent: 1em;
+    background-color: #C0E0E0;
+    font-size: 14pt;
+    padding: 5px;
+}
+h2 {
+    text-align: left;
+    text-indent: 2em;
+    background-color: #C0E0E0;
+    font-size: 12pt;
+    padding: 3px;
+}
+
+.plancontainer {
+    display: block;
+    width: 1500px;
+    height: 1000px;
+    background-color: #ddd;
+    position: relative;
+}
+.veranstaltung {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    border: 0.1px solid #333;
+    position: absolute;
+    background-color: #fff;
+    font-size: 8pt;
+    border-radius: 5px;
+    padding: 2px;
+    box-sizing: border-box;
+    transition: all .2s linear;
+    cursor: pointer;
+}
+.veranstaltung:hover {
+    width: auto !important;
+    z-index: 500;
+    transition: all .05s linear;
+}
+
+.tag {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    border-left: 0.1px dashed #aaa;
+    position: absolute;
+    font-size: 8pt;
+    height: 100%;
+    width: 19%;
+    top: 0px;
+}
+.stunde {
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    border-top: 0.1px dotted #bbb;
+    position: absolute;
+    font-size: 8pt;
+    height: 1%;
+    width: 100%;
+    left: 0px;
+}
+
+.bottom {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+.Übung {
+    background-color: #cef;
+}
+.Vorlesung {
+    background-color: #fec;
+}
+.Seminar {
+    background-color: #efc;
+}
+.Praktikum {
+    background-color: #caf;
+}
