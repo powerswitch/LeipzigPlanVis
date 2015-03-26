@@ -28,7 +28,7 @@ h2 {
     display: block;
     overflow: hidden;
     text-align: center;
-    border: 0.1px solid #333;
+    border: 1px solid #333;
     position: absolute;
     background-color: #fff;
     font-size: 8pt;
@@ -48,7 +48,7 @@ h2 {
     display: block;
     overflow: hidden;
     text-align: center;
-    border-left: 0.1px dashed #aaa;
+    border-left: 1px dashed #aaa;
     position: absolute;
     font-size: 8pt;
     height: 100%;
@@ -59,7 +59,7 @@ h2 {
     display: block;
     overflow: hidden;
     text-align: left;
-    border-top: 0.1px dotted #bbb;
+    border-top: 1px dotted #bbb;
     position: absolute;
     font-size: 8pt;
     height: 1%;
