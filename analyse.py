@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from lxml import html
 from lxml.html import builder as E
+import json
 
 doc = html.parse("http://studium.fmi.uni-leipzig.de/stundenplaene/ss2015/s15stdgang.html")
 plan = doc.find("//div[@id='stdplan']")
@@ -160,6 +161,8 @@ for studiengang in studiengaenge:
          
     document.append(container)
 
+with open("modules.json", "w") as f:
+    json.dump(tabelle, f, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
     
 html.open_in_browser(htmlfile, encoding="utf-8")
 #    tostring(doc, pretty_print=False, include_meta_content_type=False, encoding=None, method='html', with_tail=True, doctype=None)
