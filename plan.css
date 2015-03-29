@@ -38,21 +38,55 @@ h2 {
 
 
 .Übung {
-    background-color: #cef;
-    border-left: 4px solid #cef;
+    border-left: 4px solid #51a5c8;
 }
 .Vorlesung {
-    background-color: #fec;
+    border-left: 4px solid #c89337;
 }
 .Seminar {
-    background-color: #efc;
+    border-left: 4px solid #7dc822;
 }
 .Praktikum {
-    background-color: #caf;
+    border-left: 4px solid #c81e5d;
 }
 
 
+.tree.studgang {
+    font-size: 9pt;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    border-bottom: solid 1px #93abab;
+    margin-bottom: 2px;
+    height: auto;
+}
+.tree.studgang.collapsed {
+    height: 1em;
+    transition: height 0.2s;
+}
+.tree.studgang.collapsed:hover {
+    background-color: #c0e0e0;
+    height: 2em;
+    transition: height 0.2s;
+}
 
+.tree.modul {
+    font-size: 8pt;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 12px;
+    cursor: pointer;
+    line-height: normal;
+}
+.tree.modul:hover {
+    background-color: #c0e0e0;
+}
+.tree.modul.active {
+    margin-left: 0;
+    border-left: 10px solid #93abab;
+    background-color: #c0e0e0;
+    padding-left: 2px;
+}
 
 .clear {
     clear: both;
@@ -67,7 +101,7 @@ h2 {
     position: relative;
 }
 
-.sideboard {
+#sideboard {
     background-color: #fefefe;
     margin: 3px;
     padding: 2px;
@@ -109,6 +143,17 @@ h2 {
     transition: all .2s linear;
     cursor: pointer;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    line-height: 1;
+    white-space: nowrap;
+}
+.module b, .module i {
+    white-space: normal;
+    max-height: 2em;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 .bottom {
     position: absolute;
@@ -117,7 +162,7 @@ h2 {
 }
 
 @media (min-width: 1200px) {
-    .sideboard {
+    #sideboard {
         float: right;
         width: 400px;
         border-left: #93abab 3px solid;
@@ -132,7 +177,7 @@ h2 {
 }
 
 @media (min-width: 800px) and (max-width: 1199px) {
-    .sideboard {
+    #sideboard {
         float: right;
         width: 300px;
         border-left: #93abab 3px solid;
@@ -147,7 +192,7 @@ h2 {
 }
 
 @media (max-width: 799px) {
-    .sideboard {
+    #sideboard {
         border-bottom: #93abab 2px solid;
     }
     #mainview {

@@ -1,18 +1,95 @@
 var days = ["montags","dienstags","mittwochs","donnerstags","freitags"];
 var plan = {};
 
-var modules = [
+var modules = [];
+
+/**
+ * collapse or expand div
+ * @param event
+ */
+function toggleActive(event) {
+    var div = event.target;
+
+    if ( div.className.match(/(?:^|\s)active(?!\S)/) ) // I wish I just had used JQuery
     {
-        "name": "test",
-        "modul": "Testmodul",
-        "s_termin_typ": "Übung",
-        "s_termin_von": 7.5,
-        "s_termin_bis": 19,
-        "s_termin_zeit": "montags",
-        "s_termin_raum": "HS 19",
-        "s_termin_dozent": "Kurt"
+        div.className = div.className.replace( /(?:^|\s)active(?!\S)/g , '')
+        modules[div.id.replace("module","")]["active"] = false;
     }
-];
+    else
+    {
+        div.className += " active";
+        modules[div.id.replace("module","")]["active"] = true;
+    }
+
+    clearDays(document.getElementById("mainview"));
+    render();
+}
+
+/**
+ * collapse or expand div
+ * @param event
+ */
+function flip(event) {
+    var div = event.target;
+
+    if ( div.className.match(/(?:^|\s)collapsed(?!\S)/) ) // I wish I just had used JQuery
+    {
+        div.className = div.className.replace( /(?:^|\s)collapsed(?!\S)/g , '')
+    }
+    else
+    {
+        div.className += " collapsed";
+    }
+}
+
+/**
+ * create a tree to choose modules
+ */
+function createTree(dom)
+{
+    var dom = document.getElementById("sideboard");
+
+    var tree = {};
+
+    for (var module = 0; module <modules.length; module++)
+    {
+        var m_studgang = modules[module]["studiengang"];
+        var m_modul = modules[module]["modul"];
+
+        if (!tree.hasOwnProperty(m_studgang))
+        {
+            tree[m_studgang] = [];
+        }
+
+        if (!tree[m_studgang].hasOwnProperty(m_modul))
+        {
+            tree[m_studgang][m_modul] = [];
+        }
+
+        tree[m_studgang][m_modul] = modules[module];
+    }
+
+    for (var studgang in tree)
+    {
+        var sgDiv = document.createElement("div");
+        sgDiv.className = "tree studgang collapsed";
+        sgDiv.textContent = studgang;
+        sgDiv.addEventListener("click", flip);
+
+        for (var module in tree[studgang])
+        {
+            var mdDiv = document.createElement("div");
+            mdDiv.className = "tree modul";
+            mdDiv.textContent = tree[studgang][module]["name"];
+            mdDiv.id = "module"+tree[studgang][module]["id"];
+            mdDiv.addEventListener("click", toggleActive);
+
+            sgDiv.appendChild(mdDiv);
+        }
+
+        dom.appendChild(sgDiv);
+    }
+}
 
 /**
  * remove all modules from plan
@@ -23,7 +100,7 @@ function clearDays(dom)
     while (dom.firstChild) {
         dom.removeChild(dom.firstChild);
     }
-    createSkeleton();
+    createSkeleton(dom);
 }
 
 /**
@@ -79,7 +156,7 @@ function renderDay(dom, dayNr)
 
 /**
  * Take all active modules for a given day and put them into rows
- * @param day day of week
+ * @param dayNr day of week
  */
 function collisionAvoidance(dayNr)
 {
@@ -88,7 +165,7 @@ function collisionAvoidance(dayNr)
 
     for (var module = 0; module <modules.length; module++)
     {
-        if (modules[module]["s_termin_zeit"] == day) // TODO: && active
+        if (modules[module]["s_termin_zeit"] == day && modules[module]["active"]) // TODO: && active
         {
             var placed = false;
             for (var row = 0; row < plan[day].length; row++)
@@ -166,9 +243,8 @@ function generateHourLines(dom)
 /**
  * create a schedule skeleton in a dom node
  */
-function createSkeleton()
+function createSkeleton(dom)
 {
-    var dom = document.getElementById("mainview");
     generateHourLines(dom);
     generateDayRows(dom);
 }
@@ -186,6 +262,7 @@ function getModules(file) {
     xobj.onreadystatechange = function() {
         if (xobj.readyState == 4 && xobj.status == "200") {
             modules = JSON.parse(xobj.responseText);
+            createTree();
             render();
         }
     };
@@ -198,7 +275,8 @@ function getModules(file) {
  * @param event
  */
 function init(event) {
-    createSkeleton();
+    var dom = document.getElementById("mainview");
+    createSkeleton(dom);
     getModules("modules.json");
 }
 

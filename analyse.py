@@ -14,6 +14,7 @@ for studiengang in plan.findall("div[@class='s_stdgang_titel']"):
     studiengaenge.append(studiengang.find("h4").find("a").find("u").find("b").text)
 
 counter = 0
+id = 0
 for studiengang in plan.findall("div[@class='s_stdgang']"):
     #print(". ")
     #print("Studiengang: " + studiengaenge[counter])
@@ -55,6 +56,8 @@ for studiengang in plan.findall("div[@class='s_stdgang']"):
                 termin["name"] = aktuelle_veranstaltung
                 termin["modul"] = modulname
                 termin["studiengang"] = studiengaenge[counter]
+                termin["id"] = id
+                id += 1
                 tabelle.append(termin)
                 #if "s_termin_typ" in termin:
                 #    print("      " + termin["s_termin_typ"])
@@ -164,5 +167,5 @@ for studiengang in studiengaenge:
 with open("modules.json", "w") as f:
     json.dump(tabelle, f, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
     
-html.open_in_browser(htmlfile, encoding="utf-8")
+#html.open_in_browser(htmlfile, encoding="utf-8")
 #    tostring(doc, pretty_print=False, include_meta_content_type=False, encoding=None, method='html', with_tail=True, doctype=None)
