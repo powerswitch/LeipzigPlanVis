@@ -71,6 +71,15 @@ h2 {
 }
 
 .tree.modul {
+    font-size: 9pt;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 12px;
+    cursor: pointer;
+    line-height: normal;
+}
+
+.tree.fach {
     font-size: 8pt;
     white-space: nowrap;
     overflow: hidden;
@@ -78,10 +87,10 @@ h2 {
     cursor: pointer;
     line-height: normal;
 }
-.tree.modul:hover {
+.tree.fach:hover {
     background-color: #c0e0e0;
 }
-.tree.modul.active {
+.tree.fach.active {
     margin-left: 0;
     border-left: 10px solid #93abab;
     background-color: #c0e0e0;

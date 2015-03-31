@@ -51,7 +51,7 @@ function createTree(dom)
 
     var tree = {};
 
-    for (var module = 0; module <modules.length; module++)
+    for (var module = 0; module < modules.length; module++)
     {
         var m_studgang = modules[module]["studiengang"];
         var m_modul = modules[module]["modul"];
@@ -66,7 +66,7 @@ function createTree(dom)
             tree[m_studgang][m_modul] = [];
         }
 
-        tree[m_studgang][m_modul] = modules[module];
+        tree[m_studgang][m_modul].push( modules[module] );
     }
 
     for (var studgang in tree)
@@ -80,10 +80,18 @@ function createTree(dom)
         {
             var mdDiv = document.createElement("div");
             mdDiv.className = "tree modul";
-            mdDiv.textContent = tree[studgang][module]["name"];
-            mdDiv.id = "module"+tree[studgang][module]["id"];
-            mdDiv.addEventListener("click", toggleActive);
+            mdDiv.textContent = module;
 
+            for (var fach in tree[studgang][module])
+            {
+                var faDiv = document.createElement("div");
+                faDiv.className = "tree fach";
+                faDiv.textContent = tree[studgang][module][fach]["name"];
+                faDiv.id = "module"+tree[studgang][module][fach]["id"];
+                faDiv.addEventListener("click", toggleActive);
+
+                mdDiv.appendChild(faDiv);
+            }
             sgDiv.appendChild(mdDiv);
         }
 

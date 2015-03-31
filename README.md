@@ -7,3 +7,6 @@ python analyse.py
 Requirements
 python3
 python3-lxml
+
+Preview:
+http://netzente.de/stundenplan.html
