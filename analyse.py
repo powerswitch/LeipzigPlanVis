@@ -3,7 +3,7 @@ from lxml import html
 from lxml.html import builder as E
 import json
 
-doc = html.parse("http://studium.fmi.uni-leipzig.de/stundenplaene/ss2015/s15stdgang.html")
+doc = html.parse("http://studium.fmi.uni-leipzig.de/stundenplaene/ws2015/w15stdgang.html")
 plan = doc.find("//div[@id='stdplan']")
 
 studiengaenge = []

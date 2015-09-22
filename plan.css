@@ -8,16 +8,17 @@ body, html {
 h1 {
     text-align: left;
     text-indent: 1em;
-    background-color: #C0E0E0;
+    color: #EEEECC;
+    background-color: #669900;
     font-size: 14pt;
     padding: 5px;
     margin: 0;
-    border-bottom: 1px solid #93abab;
+    border-bottom: 1px solid #abab93;
 }
 h2 {
     text-align: left;
     text-indent: 2em;
-    background-color: #C0E0E0;
+    background-color: #E0E0C0;
     font-size: 12pt;
     padding: 3px;
     margin: 0;
